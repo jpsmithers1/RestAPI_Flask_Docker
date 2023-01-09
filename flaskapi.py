@@ -16,7 +16,7 @@ def get_task(task_id):
   return task
 
 if __name__ == '__main__':
-  app.run(debug=True)
+  app.run(host='0.0.0.0')
   
 # to test the api 
 # add item to list - curl -X POST -H "Content-Type: application/json" -d '{"task": "Buy milk"}' http://localhost:5000/tasks
