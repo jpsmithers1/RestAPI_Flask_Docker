@@ -49,8 +49,8 @@ stages:
 
     - script: |
         pip install pytest pytest-azurepipelines pytest-cov
-        python pytest tests/ --cov my_project --cov-report html
-      displayName: 'PyTest Execution'
+        python -m pytest tests/ --cov my_project --cov-report html
+        displayName: 'PyTest Execution'
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'
