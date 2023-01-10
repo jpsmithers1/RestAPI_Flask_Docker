@@ -46,15 +46,9 @@ stages:
         pip3 install setup
         pip3 install -r requirements.txt
         pip3 install pytest pytest-azurepipelines pytest-cov
-        python3 -m pytest --cov=application --cov-report xml:cov.xml tests/ 
+        python3 -m pytest --cov=application --cov-report html:cov_html tests/ 
       workingDirectory: $(projectRoot)
       displayName: "Install requirements and run pytest"
-
-    #- task: PublishCodeCoverageResults@1
-    #  displayName: 'Publishing Code Coverage'
-    #  inputs:
-    #    codeCoverageTool: Cobertura
-    #    summaryFileLocation: $(coverage.file)
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'
