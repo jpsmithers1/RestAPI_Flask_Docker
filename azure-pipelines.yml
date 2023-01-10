@@ -25,6 +25,12 @@ variables:
   # Python version: 3.7
   pythonVersion: '3.7'
 
+  # ptha to folder contiaining the tests
+  test.directory: tests
+
+  # path to the file containing the code coverage results
+  coverage.file: coverage.xml
+
 stages:
 - stage: Build
   displayName: Build stage
@@ -45,7 +51,9 @@ stages:
         pip install setup
         pip install -r requirements.txt
         pip install pytest pytest-azurepipelines pytest-cov
-        python -m pytest --cov application tests/ 
+        #python -m pytest --cov application tests/ 
+        # run the tests and generate the code coverage results
+        pytest --cov=. --cov-report=xml:$(coverage.file) $(test.directory)
       workingDirectory: $(projectRoot)
       displayName: "Install requirements and run pytest"
 
@@ -53,8 +61,7 @@ stages:
       displayName: 'Publishing Code Coverage'
       inputs:
         codeCoverageTool: Cobertura
-        summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage.xml'
-        reportDirectory: '$(System.DefaultWorkingDirectory)/**/htmlcov' 
+        summaryFileLocation: $(coverage.file)
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'
