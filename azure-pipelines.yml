@@ -47,7 +47,7 @@ stages:
         testOutput: 'test_output.xml'
         testResultsFile: 'test_output.xml'
         testCoverage: 'cobertura'
-        workingDirectory: $(System.DefaultWorkingDirectory)
+        workingDirectory: $(projectRoot)
       displayName: 'PyTest Execution'
 
     - script: |
