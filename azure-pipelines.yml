@@ -44,13 +44,10 @@ stages:
         python -m pip install --upgrade pip
         pip install setup
         pip install -r requirements.txt
-      workingDirectory: $(projectRoot)
-      displayName: "Install requirements"
-
-    - script: |
         pip install pytest pytest-azurepipelines pytest-cov
         python -m pytest tests/ --cov my_project --cov-report html
-      displayName: 'PyTest Execution'
+      workingDirectory: $(projectRoot)
+      displayName: "Install requirements and run pytest"
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'
@@ -66,7 +63,7 @@ stages:
       artifact: drop
 
 - stage: Deploy
-  displayName: 'Deploy Web App'
+  displayName: 'Deploy Web App'git 
   dependsOn: Build
   condition: succeeded()
   jobs:
