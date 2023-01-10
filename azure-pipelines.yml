@@ -45,7 +45,7 @@ stages:
         pip install setup
         pip install -r requirements.txt
         pip install pytest pytest-azurepipelines pytest-cov
-        python -m pytest tests/ --cov=my_project --cov-report html
+        python -m pytest --cov=my_project tests/ 
       workingDirectory: $(projectRoot)
       displayName: "Install requirements and run pytest"
 
