@@ -46,7 +46,7 @@ stages:
         pip3 install setup
         pip3 install -r requirements.txt
         pip3 install pytest pytest-azurepipelines pytest-cov
-        python3 -m pytest --cov=application --cov-report html:cov_html tests/ 
+        python3 -m pytest --cov=application --cov-report html tests/ 
       workingDirectory: $(projectRoot)
       displayName: "Install requirements and run pytest"
 
