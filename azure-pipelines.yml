@@ -48,8 +48,8 @@ stages:
       displayName: "Install requirements"
 
     - script: |
-        pip install pytest pytest-azurepipelines
-        python -m pytest tests/
+        pip install pytest pytest-azurepipelines pytest-cov
+        python pytest tests/ --cov my_project --cov-report html
       displayName: 'PyTest Execution'
 
     - task: ArchiveFiles@2
