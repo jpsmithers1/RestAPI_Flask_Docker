@@ -38,6 +38,18 @@ stages:
         versionSpec: '$(pythonVersion)'
       displayName: 'Use Python $(pythonVersion)'
 
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '$(pythonVersion)'
+        pythonInterpreter: '$(pythonVersion)'
+        scriptType: 'pytest'
+        scriptPath: 'test_*.py'
+        testOutput: 'test_output.xml'
+        testResultsFile: 'test_output.xml'
+        testCoverage: 'cobertura'
+        workingDirectory: $(System.DefaultWorkingDirectory)
+      displayName: 'PyTest Execution'
+
     - script: |
         python -m venv antenv
         source antenv/bin/activate
