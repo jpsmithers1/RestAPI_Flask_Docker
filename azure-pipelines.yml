@@ -49,7 +49,7 @@ stages:
 
     - script: |
         pip install pytest pytest-azurepipelines
-        pytest
+        python -m pytest tests/
       displayName: 'PyTest Execution'
 
     - task: ArchiveFiles@2
