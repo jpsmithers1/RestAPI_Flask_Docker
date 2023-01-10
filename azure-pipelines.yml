@@ -23,7 +23,8 @@ variables:
   projectRoot: $(System.DefaultWorkingDirectory)
 
   # Python version: 3.10
-  pythonVersion: '3.10
+  pythonVersion: '3.10'
+
 
 stages:
 - stage: Build
@@ -53,7 +54,7 @@ stages:
     #  displayName: 'Publishing Code Coverage'
     #  inputs:
     #    codeCoverageTool: Cobertura
-    #   summaryFileLocation: $(coverage.file)
+    #    summaryFileLocation: $(coverage.file)
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'
