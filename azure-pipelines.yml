@@ -34,11 +34,16 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
+    # Set the Python version
     - task: UsePythonVersion@0
       inputs:
         versionSpec: '$(pythonVersion)'
       displayName: 'Use Python $(pythonVersion)'
 
+    # Create a virtual python environment, activate it.
+    # Install pip, dependent packages listed in requirement.tex
+    # install pytest (python testing), pytest-azurepipelines (enables native integratn with devops azure) and pytest-cov to create coverage report
+    # run pytest
     - script: |
         python -m venv antenv
         source antenv/bin/activate
@@ -50,6 +55,7 @@ stages:
       workingDirectory: $(projectRoot)
       displayName: "Install requirements and run pytest"
 
+    # Create build archive files zip
     - task: ArchiveFiles@2
       displayName: 'Archive files'
       inputs:
@@ -59,10 +65,12 @@ stages:
         archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
         replaceExistingArchive: true
 
+    # Store zip archive files on devops azure
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       displayName: 'Upload package'
       artifact: drop
 
+# Deploy application to Azure WebApp
 - stage: Deploy
   displayName: 'Deploy Web App'
   dependsOn: Build
@@ -76,12 +84,12 @@ stages:
       runOnce:
         deploy:
           steps:
-
+          # Set the python version
           - task: UsePythonVersion@0
             inputs:
               versionSpec: '$(pythonVersion)'
             displayName: 'Use Python version'
-
+          # Deploy to Azure WebApp
           - task: AzureWebApp@1
             displayName: 'Deploy Azure Web App : FlaskSampleWebApp'
             inputs:
