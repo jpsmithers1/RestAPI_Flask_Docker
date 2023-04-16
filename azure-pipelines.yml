@@ -56,6 +56,9 @@ stages:
       workingDirectory: $(projectRoot)
       displayName: "Install requirements and run pytest"
 
+    - script: |
+      ls test-results  
+
     # publish results to Azure Devops against pipeline run
     - task: PublishTestResults@2
       inputs:
