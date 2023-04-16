@@ -52,7 +52,7 @@ stages:
         pip3 install -r requirements.txt
         pip3 install pytest pytest-azurepipelines pytest-json-report behave
         pytest --junitxml=./test-results/pytest/junit.xml
-        behave --junit --out=./test-results/bdd/junit.xml
+        behave --junit --junit-directory=./test-results/bdd/
 
       workingDirectory: $(projectRoot)
       displayName: "Install requirements and run pytest"
