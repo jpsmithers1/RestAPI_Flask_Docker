@@ -57,7 +57,7 @@ stages:
       displayName: "Install requirements and run pytest"
 
     - script: |
-      ls test-results  
+        ls test-results  
 
     # publish results to Azure Devops against pipeline run
     - task: PublishTestResults@2
