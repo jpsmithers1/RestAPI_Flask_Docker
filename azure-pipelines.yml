@@ -53,7 +53,7 @@ stages:
         pip3 install pytest pytest-azurepipelines pytest-cov behave
         python3 -m pytest --cov=application --cov-report html tests/ 
         behave --junit --junit-directory junit-reports features/
-        python3 -m pytest --cov=application --cov-report html --cov-append junit-reports/TESTS-testapplication.xml --cov-config=.coveragerc tests/
+        python3 -m pytest --cov=application --cov-report html --cov-append junit-reports/TESTS-testapplication.xml
         
       workingDirectory: $(projectRoot)
       displayName: "Install requirements and run pytest"
