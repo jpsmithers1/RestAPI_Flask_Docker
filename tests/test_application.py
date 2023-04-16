@@ -1,6 +1,6 @@
 import pytest
 import json
-from application import app
+from application.flaskapplication import app
 
 def test_add_tasks():
     """Test the adding of a task"""

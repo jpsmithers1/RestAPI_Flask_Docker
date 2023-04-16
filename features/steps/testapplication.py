@@ -1,6 +1,6 @@
 from behave import *
 import json
-from application import app
+from application.flaskapplication import app
 
 @given('a buy milk task is added to the task list')
 def step_impl(context):
