@@ -51,8 +51,8 @@ stages:
         pip3 install setup
         pip3 install -r requirements.txt
         pip3 install pytest pytest-azurepipelines pytest-json-report behave
-        pytest --json-report --json-report-file=./test-results/pytest 
-        behave -f json.pretty --out=./test-results/bdd
+        pytest --json-report --json-report-file=./test-results/pytest.json 
+        behave -f json.pretty --out=./test-results/bdd.json
       workingDirectory: $(projectRoot)
       displayName: "Install requirements and run pytest"
 
@@ -64,13 +64,13 @@ stages:
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'JUnit'
-        testResultsFiles: '$(System.DefaultWorkingDirectory)/test-results/*.json'
+        testResultsFiles: '$(System.DefaultWorkingDirectory)/test-results/pytest.json'
       displayName: 'Publish pytest results'
 
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'Cucumber'
-        testResultsFiles: '$(System.DefaultWorkingDirectory)/test-results/*.json'
+        testResultsFiles: '$(System.DefaultWorkingDirectory)/test-results/bdd.json'
       displayName: 'Publish BDD test results'
 
 
