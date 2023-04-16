@@ -64,13 +64,13 @@ stages:
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'JUnit'
-        testResultsFiles: '$(System.DefaultWorkingDirectory)/test-results/pytest/*.json'
+        testResultsFiles: '$(System.DefaultWorkingDirectory)/test-results/*.json'
       displayName: 'Publish pytest results'
 
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'Cucumber'
-        testResultsFiles: '$(System.DefaultWorkingDirectory)/test-results/bdd/*.json'
+        testResultsFiles: '$(System.DefaultWorkingDirectory)/test-results/*.json'
       displayName: 'Publish BDD test results'
 
 
@@ -86,7 +86,7 @@ stages:
 
     # Store zip archive files on devops azure
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
-      displayName: 'publish  package'
+      displayName: 'publish package'
       artifact: drop
 
 # Deploy application to Azure WebApp
