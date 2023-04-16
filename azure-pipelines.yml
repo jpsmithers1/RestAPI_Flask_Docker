@@ -59,13 +59,13 @@ stages:
     # publish results to Azure Devops against pipeline run
     - task: PublishTestResults@2
       inputs:
-        testResultsFormat: 'JUnit'
+        testResultsFormat: 'json'
         testResultsFiles: './test-results/pytest/*.json'
       displayName: 'Publish pytest results'
 
     - task: PublishTestResults@2
       inputs:
-        testResultsFormat: 'Cucumber'
+        testResultsFormat: 'json'
         testResultsFiles: './test-results/bdd/*.json'
       displayName: 'Publish BDD test results'
 
