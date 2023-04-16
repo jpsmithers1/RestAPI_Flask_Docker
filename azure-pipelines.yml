@@ -100,6 +100,13 @@ stages:
 
     #If needed we can run a script here to call the sonarcloud api to get quality gate status 
     #and fail the pipeline if the quality gate fails      
+    #- script: |
+        #response=$(curl -s -H "Authorization: Basic $(echo -n "$sonarCloudToken:" | base64)" "https://sonarcloud.io/api/qualitygates/project_status?projectKey=$(sonarCloudProjectKey)")
+        #qualityGateStatus=$(echo $response | jq -r .projectStatus.status)
+        #echo "Quality Gate status: $qualityGateStatus"
+        #if [ "$qualityGateStatus" != "OK" ]; then
+        #  echo "##vso[task.complete result=Failed;]Failed due to quality gate not passing"
+        #fi
 
     # Create build archive files zip
     - task: ArchiveFiles@2
