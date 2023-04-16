@@ -51,13 +51,13 @@ stages:
         pip3 install setup
         pip3 install -r requirements.txt
         pip3 install pytest pytest-azurepipelines pytest-json-report behave
-        pytest --junitxml=./test-results/pytest/junit.xml --cov=./ --cov-report=html
+        pytest --junitxml=./test-results/pytest/junit.xml --cov=./ --cov-report=xml --cov-report=html
         behave --junit --junit-directory=./test-results/bdd/
 
       workingDirectory: $(projectRoot)
       displayName: "Install requirements and run pytest"
 
-    # publish results to Azure Devops against pipeline run
+    # publish test results to Azure Devops against pipeline run
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'JUnit'
@@ -70,6 +70,13 @@ stages:
         testResultsFiles: '$(System.DefaultWorkingDirectory)/test-results/bdd/*.xml'
       displayName: 'Publish BDD test results'
 
+    # publish code coverage to Azure Devops against pipeline run
+    - task: PublishCodeCoverageResults@1
+      inputs:
+        codeCoverageTool: Cobertura
+        summaryFileLocation: '$(System.DefaultWorkingDirectory)/coverage.xml'
+        reportDirectory: '$(System.DefaultWorkingDirectory)/htmlcov'
+      displayName: 'Publish code coverage results'
 
     # Create build archive files zip
     - task: ArchiveFiles@2
