@@ -50,7 +50,7 @@ stages:
         python -m pip install --upgrade pip
         pip3 install setup
         pip3 install -r requirements.txt
-        pip3 install pytest pytest-azurepipelines pytest-cov -report behave
+        pip3 install pytest pytest-azurepipelines pytest-cov behave
         pytest --junitxml=./test-results/pytest/junit.xml --cov=./ --cov-report=xml --cov-report=html
         behave --junit --junit-directory=./test-results/bdd/
 
