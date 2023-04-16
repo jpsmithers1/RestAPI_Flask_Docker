@@ -98,6 +98,16 @@ stages:
         pollingTimeoutSec: '300'
       displayName: 'Publish analysis results to SonarCloud'
 
+    #If needed we can run a script here to call the sonarcloud api to get quality gate status 
+    #and fail the pipeline if the quality gate fails
+    - script: |
+        response=$(curl -s -H "Authorization: Basic $(echo -n "$SonarCloudKey:" | base64)" "https://sonarcloud.io/api/qualitygates/project_status?projectKey=jpsmithers1_RestAPI_Flask_Docker")
+        qualityGateStatus=$(echo $response | jq -r .projectStatus.status)
+        echo "Quality Gate status: $qualityGateStatus"
+        if [ "$qualityGateStatus" != "OK" ]; then
+          echo "##vso[task.complete result=Failed;]Failed due to quality gate not passing"
+        fi
+
     # Create build archive files zip
     - task: ArchiveFiles@2
       displayName: 'Archive files'
