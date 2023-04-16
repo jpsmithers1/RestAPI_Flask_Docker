@@ -50,8 +50,9 @@ stages:
         python -m pip install --upgrade pip
         pip3 install setup
         pip3 install -r requirements.txt
-        pip3 install pytest pytest-azurepipelines pytest-cov
+        pip3 install pytest pytest-azurepipelines pytest-cov behave
         python3 -m pytest --cov=application --cov-report html tests/ 
+        behave --junit --junit-directory bddtestresults
       workingDirectory: $(projectRoot)
       displayName: "Install requirements and run pytest"
 
@@ -84,11 +85,6 @@ stages:
       runOnce:
         deploy:
           steps:
-          # Set the python version
-          #- task: UsePythonVersion@0
-          #  inputs:
-          #    versionSpec: '$(pythonVersion)'
-          #  displayName: 'Use Python version'
           # Deploy to Azure WebApp
           - task: AzureWebApp@1
             displayName: 'Deploy Azure Web App : FlaskSampleWebApp'
