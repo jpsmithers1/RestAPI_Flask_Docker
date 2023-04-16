@@ -66,8 +66,8 @@ stages:
         replaceExistingArchive: true
 
     # Store zip archive files on devops azure
-    - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
-      displayName: 'Upload package'
+    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+      displayName: 'publish  package'
       artifact: drop
 
 # Deploy application to Azure WebApp
@@ -83,12 +83,12 @@ stages:
     strategy:
       runOnce:
         deploy:
-          steps:
+          #steps:
           # Set the python version
-          - task: UsePythonVersion@0
-            inputs:
-              versionSpec: '$(pythonVersion)'
-            displayName: 'Use Python version'
+          #- task: UsePythonVersion@0
+          #  inputs:
+          #    versionSpec: '$(pythonVersion)'
+          #  displayName: 'Use Python version'
           # Deploy to Azure WebApp
           - task: AzureWebApp@1
             displayName: 'Deploy Azure Web App : FlaskSampleWebApp'
