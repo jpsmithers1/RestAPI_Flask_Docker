@@ -51,9 +51,9 @@ stages:
         pip3 install setup
         pip3 install -r requirements.txt
         pip3 install pytest pytest-azurepipelines pytest-cov behave
-        python3 -m pytest --cov=application --cov-report html tests/ 
-        behave --junit --junit-directory bddtestresults
-        python3 -m pytest --cov=application --cov-report html --cov-append bddtestresults/TESTS-testapplication.xml
+        pytest --cov=application --cov-report html tests/ 
+        behave --junit --junit-directory junit-reports --cov=application --cov-report=html --cov-append features/
+        coverage combine
 
       workingDirectory: $(projectRoot)
       displayName: "Install requirements and run pytest"
