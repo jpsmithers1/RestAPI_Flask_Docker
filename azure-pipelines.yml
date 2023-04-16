@@ -83,7 +83,7 @@ stages:
     strategy:
       runOnce:
         deploy:
-          #steps:
+          steps:
           # Set the python version
           #- task: UsePythonVersion@0
           #  inputs:
