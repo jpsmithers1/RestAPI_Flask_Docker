@@ -78,6 +78,31 @@ stages:
         reportDirectory: '$(System.DefaultWorkingDirectory)/htmlcov'
       displayName: 'Publish code coverage results'
 
+    # prepare sonarcloud analysis
+    - task: SonarCloudPrepare@1
+      inputs:
+        SonarCloud: 'SonarCloud'
+        organization: 'jpsmithers1'
+        scannerMode: 'CLI'
+        configMode: 'automatic'
+        cliProjectKey: 'jpsmithers1_RestAPI_Flask_Docker'
+        cliProjectName: 'RestAPI_Flask_Docker'
+        cliSources: '.'
+      displayName: 'Prepare SonarCloud analysis'
+    
+    - task: SonarCloudAnalyze@1
+      displayName: 'Run Code Analysis with SonarCloud'
+
+    - task: SonarCloudPublish@1
+      inputs:
+        pollingTimeoutSec: '300'
+      displayName: 'Publish analysis results to SonarCloud'
+
+    - task: SonarCloudQualityGate@1
+      inputs:
+        pollingTimeoutSec: '300'
+      displayName: 'Validate SonarCloud analysis results'
+
     # Create build archive files zip
     - task: ArchiveFiles@2
       displayName: 'Archive files'
