@@ -50,7 +50,7 @@ stages:
         python -m pip install --upgrade pip
         pip3 install setup
         pip3 install -r requirements.txt
-        pip3 install pytest pytest-azurepipelines pytest-cov behave
+        pip3 install pytest pytest-azurepipelines pytest-json behave
         python3 -m pytest --json-report --json-report-dir=./test-results/pytest 
         behave -f json.pretty --out=./test-results/bdd
    
