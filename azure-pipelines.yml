@@ -60,13 +60,13 @@ stages:
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'JUnit'
-        testResultsFiles: '**/test-results/pytest/*.json'
+        testResultsFiles: './test-results/pytest/*.json'
       displayName: 'Publish pytest results'
 
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: 'Cucumber'
-        testResultsFiles: '**/test-results/bdd/*.json'
+        testResultsFiles: './test-results/bdd/*.json'
       displayName: 'Publish BDD test results'
 
 
