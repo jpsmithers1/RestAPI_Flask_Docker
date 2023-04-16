@@ -87,7 +87,7 @@ stages:
         configMode: 'automatic'
         cliProjectKey: 'jpsmithers1_RestAPI_Flask_Docker'
         cliProjectName: 'RestAPI_Flask_Docker'
-        cliSources: '.'
+        cliSources: './application'
       displayName: 'Prepare SonarCloud analysis'
     
     - task: SonarCloudAnalyze@1
