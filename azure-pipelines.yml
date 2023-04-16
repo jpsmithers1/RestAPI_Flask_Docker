@@ -93,6 +93,11 @@ stages:
     - task: SonarCloudAnalyze@1
       displayName: 'Run Code Analysis with SonarCloud'
 
+    - task: SonarCloudQualityGate@1
+      inputs:
+        pollingTimeoutSec: '300'
+      displayName: 'Validate SonarCloud analysis results'
+
     - task: SonarCloudPublish@1
       inputs:
         pollingTimeoutSec: '300'
